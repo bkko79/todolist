@@ -23,14 +23,16 @@ class App extends Component {
 
   handleCreate = () => {
     const {input, todos} = this.state;
-    this.setState({
-      input: '',
-      todos: todos.concat({
-        id: this.id++,
-        text: input,
-        checked: false
+    if (input !== ''){
+      this.setState({
+        input: '',
+        todos: todos.concat({
+          id: this.id++,
+          text: input,
+          checked: false
+        })
       })
-    });
+    };
   }
 
   handleKeyPress = (e) => {
@@ -64,13 +66,7 @@ class App extends Component {
 
   render(){
     const { input, todos } = this.state;
-    const {
-      handleChange,
-      handleCreate,
-      handleKeyPress,
-      handleToggle,
-      handleRemove
-    } = this;
+    const { handleChange, handleCreate, handleKeyPress, handleToggle, handleRemove } = this;
 
     return (
       <TodoListTemplate form={(

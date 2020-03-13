@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import TodoItem from './TodoItem';
+import './TodoItemList.css';
 
 class TodoItemList extends Component {
     shouldComponentUpdate(nextProps, nextState){
@@ -7,22 +9,32 @@ class TodoItemList extends Component {
     }
 
     render() {
-        const { todos, onToggle, onRemove} = this.props;
+        const { todos, onToggle, onRemove } = this.props;
         const todoList = todos.map(
             ({id,text,checked}) => (
-                <TodoItem
-                  id={id}
-                  text={text}
-                  checked={checked}
-                  onToggle={onToggle}
-                  onRemove={onRemove}
+                <CSSTransition
                   key={id}
-                />
+                  timeout={300}
+                  classNames="item"
+                >
+                    <TodoItem
+                      id={id}
+                      text={text}
+                      checked={checked}
+                      onToggle={onToggle}
+                      onRemove={onRemove}
+                      key={id}
+                    />
+                </CSSTransition>
             )
         );
         return (
             <div>
-                {todoList}
+                <TransitionGroup
+                    className="todo-list"
+                >
+                    {todoList}
+                </TransitionGroup>
             </div>
         );
     }

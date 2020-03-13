@@ -1,10 +1,8 @@
 .todo-list-template {
     background: white;
-    width: 85%;
     max-width: 512px;
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-    margin: 0 auto;
-    margin-top: 4rem;
+    margin: 2rem auto;
 }
 
 .title {
@@ -23,4 +21,12 @@
 
 .todos-wrapper {
     min-height: 5rem;
+}
+
+
+@media (max-width: 512px) {
+    .todo-list-template {
+        margin: 1rem 10px;
+        max-width: 100%;
+    }
 }
