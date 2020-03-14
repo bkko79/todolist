@@ -4,15 +4,18 @@ import Form from './components/Form';
 import TodoItemList from './components/TodoItemList';
 
 class App extends Component {
-
-  id = 3;
-  state = {
-    input: '',
-    todos: [
-      {id: 0, text: 'hello', checked: false},
-      {id: 1, text: 'react', checked: true},
-      {id: 2, text: 'Nintendo', checked: false}
-    ]
+  constructor(props){
+    super(props);
+    this.handleTime = this.handleTime.bind(this);
+    this.id = 3;
+    this.state = {
+      input: '',
+      todos: [
+        {id: 0, text: 'hello', checked: false, timer: false},
+        {id: 1, text: 'react', checked: true, timer: false},
+        {id: 2, text: 'Nintendo', checked: false, timer: false}
+      ]
+    }
   }
 
   handleChange = (e) => {
@@ -29,7 +32,8 @@ class App extends Component {
         todos: todos.concat({
           id: this.id++,
           text: input,
-          checked: false
+          checked: false,
+          timer: '',
         })
       })
     };
@@ -64,9 +68,27 @@ class App extends Component {
     });
   }
 
+  handleTime = (id, date) => {
+    console.log(id, date);
+    const { todos } = this.state;
+    const index = todos.findIndex(todo => todo.id === id);
+    const selected = todos[index];
+    const nextTodos = [...todos];
+
+    nextTodos[index] = {
+      ...selected,
+      timer: date
+    };
+    
+    this.setState({
+      todos: nextTodos
+    });
+    console.log(todos);
+  }
+
   render(){
     const { input, todos } = this.state;
-    const { handleChange, handleCreate, handleKeyPress, handleToggle, handleRemove } = this;
+    const { handleChange, handleCreate, handleKeyPress, handleToggle, handleRemove, handleTime } = this;
 
     return (
       <TodoListTemplate form={(
@@ -79,7 +101,8 @@ class App extends Component {
         <TodoItemList 
           todos={todos}
           onToggle={handleToggle}
-          onRemove={handleRemove} />
+          onRemove={handleRemove}
+          onChangeTime={(id, date) => handleTime(id, date)} />
       </TodoListTemplate>
     );
   }

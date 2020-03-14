@@ -9,9 +9,9 @@ class TodoItemList extends Component {
     }
 
     render() {
-        const { todos, onToggle, onRemove } = this.props;
+        const { todos, onToggle, onRemove, onChangeTime } = this.props;
         const todoList = todos.map(
-            ({id,text,checked}) => (
+            ({id,text,checked,timer}) => (
                 <CSSTransition
                   key={id}
                   timeout={300}
@@ -21,8 +21,10 @@ class TodoItemList extends Component {
                       id={id}
                       text={text}
                       checked={checked}
+                      timer={timer}
                       onToggle={onToggle}
                       onRemove={onRemove}
+                      onChangeTime={(id, date) => onChangeTime(id, date)}
                       key={id}
                     />
                 </CSSTransition>
