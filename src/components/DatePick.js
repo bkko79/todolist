@@ -35,7 +35,7 @@ class Picker extends Component {
     render(){
         return(
             <div className="todo-calendar">
-                <span role="img" aria-label="timer" onClick={this.toggleOn.bind(this)}>⏲️</span>
+                <span role="img" aria-label="timer" onClick={this.toggleOn.bind(this)}>⏱️</span>
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                     <DateTimePicker 
                         open={this.state.isOpen}
