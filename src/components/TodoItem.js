@@ -33,7 +33,6 @@ class TodoItem extends Component {
                 msg += hs + " hour and ";
             } 
             msg += mins + " minute left.";
-            console.log(msg);
         } else {
             msg = "Time exceeded."
         }
