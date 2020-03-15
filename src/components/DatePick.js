@@ -29,7 +29,6 @@ class Picker extends Component {
         window.scrollTo(0, parseInt(scrollY || '0') * -1);
     }
     setDate(date) {
-        console.log(Date);
         this.props.onChangeTime(this.state.id.id, date.valueOf());
     }
 

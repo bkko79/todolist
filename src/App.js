@@ -69,7 +69,6 @@ class App extends Component {
   }
 
   handleTime = (id, date) => {
-    console.log(id, date);
     const { todos } = this.state;
     const index = todos.findIndex(todo => todo.id === id);
     const selected = todos[index];
@@ -83,7 +82,6 @@ class App extends Component {
     this.setState({
       todos: nextTodos
     });
-    console.log(todos);
   }
 
   render(){
