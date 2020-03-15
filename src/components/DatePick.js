@@ -45,6 +45,7 @@ class Picker extends Component {
                         onChange={(date) => this.setDate(date)}
                         TextFieldComponent={() => null}
                         minDate={new Date()}
+                        ampm={false}
                         format="yyyy/MM/dd HH:mm"
                     />
                 </MuiPickersUtilsProvider>
