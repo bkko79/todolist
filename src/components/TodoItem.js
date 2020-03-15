@@ -15,34 +15,36 @@ class TodoItem extends Component {
     }
 
     componentDidMount(){
-        setInterval( () => {
-            this.timeCalculator(this.props.timer);
-        }, 1000)
+            setInterval( () => {
+                this.timeCalculator(this.props.timer);
+            }, 1000)
     }
 
-    async timeCalculator(timer){
-        let ms = timer - new Date().valueOf();
-        let hs,mins;
-        let msg = '';
-        if (ms >= 0){
-            hs = Math.floor(ms / 1000 / 60 / 60);
-            mins = Math.floor((ms / 1000 / 60) % 60);
-            if ( hs > 1 ){
-                msg += hs + " hours and ";
-            } else if ( hs === 1 ){
-                msg += hs + " hour and ";
-            } 
-            msg += mins + " minute left.";
-        } else {
-            msg = "Time exceeded."
+    timeCalculator(timer){
+        if (timer !== false){
+            let ms = timer - new Date().valueOf();
+            let hs,mins;
+            let msg = '';
+            if (ms >= 0){
+                hs = Math.floor(ms / 1000 / 60 / 60);
+                mins = Math.floor((ms / 1000 / 60) % 60);
+                if ( hs > 1 ){
+                    msg += hs + " hours and ";
+                } else if ( hs === 1 ){
+                    msg += hs + " hour and ";
+                } 
+                msg += mins + " minute left.";
+            } else {
+                msg = "Time exceeded."
+            }
+            this.setState({
+                message: msg,
+            })
         }
-        this.setState({
-            message: msg,
-        })
     }
 
     render(){
-        const { text, checked, id, timer, onToggle, onRemove, onChangeTime } = this.props;
+        const { text, checked, id, timer, onToggle, onRemove, onChangeTime, onDeleteTime } = this.props;
 
         return (
             <div className="todo-wrap">
@@ -57,14 +59,24 @@ class TodoItem extends Component {
                         <div onClick={() => onToggle(id)}>{text}</div>
                     </div>
                     {
-                        !checked && (<Picker id={id} onChangeTime={(id, date) => onChangeTime(id, date) && this.timeCalculator(date)} />)
+                        !checked && (<Picker id={id} onChangeTime={(id, date) => onChangeTime(id, date)} />)
                     }
                     {
                         checked && (<div className="check-mark">✓</div>)
                     }
                 </div>
                 {
-                    timer && !checked && (<div className="accept-time">{this.state.message}</div>)
+                    timer && !checked && (
+                        <div className="accept-time">
+                            <div className="remove-time" onClick={(e) => {
+                                e.stopPropagation();
+                                onDeleteTime(id);
+                            }}>
+                                &times;
+                            </div>
+                            <div className="time-text">{this.state.message}</div>
+                        </div>
+                    )
                 }
             </div>
         );

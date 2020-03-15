@@ -9,7 +9,7 @@ class TodoItemList extends Component {
     }
 
     render() {
-        const { todos, onToggle, onRemove, onChangeTime } = this.props;
+        const { todos, onToggle, onRemove, onChangeTime, onDeleteTime } = this.props;
         const todoList = todos.map(
             ({id,text,checked,timer}) => (
                 <CSSTransition
@@ -25,6 +25,7 @@ class TodoItemList extends Component {
                       onToggle={onToggle}
                       onRemove={onRemove}
                       onChangeTime={(id, date) => onChangeTime(id, date)}
+                      onDeleteTime={onDeleteTime}
                       key={id}
                     />
                 </CSSTransition>

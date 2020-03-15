@@ -33,7 +33,7 @@ class App extends Component {
           id: this.id++,
           text: input,
           checked: false,
-          timer: '',
+          timer: false,
         })
       })
     };
@@ -83,10 +83,25 @@ class App extends Component {
       todos: nextTodos
     });
   }
+  handleTimeRemove = (id) => {
+    const { todos} = this.state;
+    const index = todos.findIndex(todo => todo.id === id);
+    const selected = todos[index];
+    const nextTodos = [...todos];
+
+    nextTodos[index] = {
+      ...selected,
+      timer: false
+    };
+    
+    this.setState({
+      todos: nextTodos
+    });
+  }
 
   render(){
     const { input, todos } = this.state;
-    const { handleChange, handleCreate, handleKeyPress, handleToggle, handleRemove, handleTime } = this;
+    const { handleChange, handleCreate, handleKeyPress, handleToggle, handleRemove, handleTime, handleTimeRemove } = this;
 
     return (
       <TodoListTemplate form={(
@@ -100,7 +115,8 @@ class App extends Component {
           todos={todos}
           onToggle={handleToggle}
           onRemove={handleRemove}
-          onChangeTime={(id, date) => handleTime(id, date)} />
+          onChangeTime={(id, date) => handleTime(id, date)}
+          onDeleteTime={handleTimeRemove} />
       </TodoListTemplate>
     );
   }
