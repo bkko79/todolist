@@ -16,9 +16,15 @@ class Picker extends Component {
 
     toggleOn() {
         this.setState({ setIsOpen: true, isOpen: true });
+        document.body.style.position = 'fixed';
+        document.body.style.top = `-${window.scrollY}px`;
     }
     toggleOff() {
         this.setState({ setIsOpen: false, isOpen: false });
+        const scrollY = document.body.style.top;
+        document.body.style.position = '';
+        document.body.style.top = '';
+        window.scrollTo(0, parseInt(scrollY || '0') * -1);
     }
     setDate(date) {
         console.log(Date);
