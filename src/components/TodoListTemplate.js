@@ -2,8 +2,13 @@ import React from 'react';
 import './TodoListTemplate.css';
 
 class TodoListTemplate extends React.Component {
-    state = {
-        date: new Date().toLocaleString('en-US', { timeZone: 'UTC' })
+    constructor(props){
+        super(props);
+        
+        this.state = {
+            date: new Date().toLocaleString('en-US', { timeZone: 'UTC' }),
+            animationClass: 'titleAnimation'
+        }
     }
     componentDidMount(){
         setInterval( () => {
@@ -16,7 +21,7 @@ class TodoListTemplate extends React.Component {
         const { form, children } = this.props;
         return (
             <main className="todo-list-template">
-                <div className="title">
+                <div className={this.state.animationClass}>
                     TO DO
                     <p className="currentTime">{this.state.date}</p>
                 </div>
