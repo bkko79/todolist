@@ -20,7 +20,7 @@ class TodoItem extends Component {
         }, 1000)
     }
 
-    timeCalculator(timer){
+    async timeCalculator(timer){
         let ms = timer - new Date().valueOf();
         let hs,mins;
         let msg = '';
@@ -57,7 +57,7 @@ class TodoItem extends Component {
                         <div onClick={() => onToggle(id)}>{text}</div>
                     </div>
                     {
-                        !checked && (<Picker id={id} onChangeTime={(id, date) => onChangeTime(id, date) } />)
+                        !checked && (<Picker id={id} onChangeTime={(id, date) => onChangeTime(id, date) && this.timeCalculator(date)} />)
                     }
                     {
                         checked && (<div className="check-mark">✓</div>)
