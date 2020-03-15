@@ -16,11 +16,13 @@ class Picker extends Component {
 
     toggleOn() {
         this.setState({ setIsOpen: true, isOpen: true });
+        // safari Bg Swipe Movement prevention
         document.body.style.position = 'fixed';
         document.body.style.top = `-${window.scrollY}px`;
     }
     toggleOff() {
         this.setState({ setIsOpen: false, isOpen: false });
+        // safari Bg Swipe Movement prevention disabled
         const scrollY = document.body.style.top;
         document.body.style.position = '';
         document.body.style.top = '';
