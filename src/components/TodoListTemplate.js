@@ -3,12 +3,12 @@ import './TodoListTemplate.css';
 
 class TodoListTemplate extends React.Component {
     state = {
-        date: new Date().toLocaleString()
+        date: new Date().toLocaleString('en-US', { timeZone: 'UTC' })
     }
     componentDidMount(){
         setInterval( () => {
             this.setState({
-                date: new Date().toLocaleString()
+                date: new Date().toLocaleString('en-US')
             })
         }, 1000)
     }
